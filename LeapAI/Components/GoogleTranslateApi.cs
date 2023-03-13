@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Nodes;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace LeapAI.Components
@@ -24,6 +25,7 @@ namespace LeapAI.Components
                 if (response.IsSuccessful)
                 {
                     var json = response.Content;
+                    
                     var jArray = JsonNode.Parse(json);
                     return jArray[0][0][0].ToString();
                 }
@@ -35,6 +37,11 @@ namespace LeapAI.Components
             }
 
             return null;
+        }
+
+        private class GoogleTranslateResult
+        {
+
         }
     }
 }

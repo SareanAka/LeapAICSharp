@@ -16,7 +16,6 @@ namespace LeapAI.Components
 
             var output = await _translator.TranslateTextAsync(input, null, LanguageCode.Japanese);
             return output.Text;
-
         }
     }
 }

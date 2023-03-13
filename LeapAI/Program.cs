@@ -1,4 +1,5 @@
 ﻿using LeapAI.Components;
+using NAudio.Wave;
 
 namespace LeapAI;
 
@@ -10,17 +11,22 @@ public class Program
     // Instantiate all the classes
     private static readonly AudioRecorder Recorder = new(FileReader);
     private static readonly WhisperApi Whisper = new (FileReader);
-
     private static readonly DeepLApi DeepL = new (FileReader);
     private static readonly GoogleTranslateApi GoogleTranslate = new();
-
     private static readonly VoiceVoxApi VoiceVox = new (FileReader);
+    private static readonly AudioPlayer VoicePlayer = new(FileReader);
 
     // Get the keycode for the push-to-talk button
     private static readonly int VkN = int.Parse(FileReader.IniReadValue("PUSH TO TALK KEY", "MIC_RECORD_KEY"));
 
     public static async Task Main()
     {
+        var deviceList = DirectSoundOut.Devices.ToList();
+        for (var i = 0; i < deviceList.Count; i++)
+        {
+            var caps = deviceList[i];
+            Console.WriteLine($"{i}: {caps.Description}");
+        }
         await CheckRecordAsync();
     }
 
@@ -76,8 +82,10 @@ public class Program
                             // Run the translated text into the Japanese Text-to-speech program
                             var result = await VoiceVox.TextToSpeechAsync(translatedText);
 
-                            await using var writer = new BinaryWriter(File.OpenWrite(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio", "resultJP.wav")));
-                            if (result != null) writer.Write(result);
+                            if (result != null)
+                            {
+                                VoicePlayer.PlayAudio(result);
+                            }
                         } else {Console.WriteLine("No translated text was found.");}
                     } else {Console.WriteLine("Whisper has detected no speech.");}
                 }

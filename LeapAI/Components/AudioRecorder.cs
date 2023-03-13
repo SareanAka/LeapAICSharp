@@ -1,5 +1,4 @@
 ﻿using NAudio.Wave;
-
 using System.Runtime.InteropServices;
 
 namespace LeapAI.Components
