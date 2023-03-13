@@ -21,21 +21,29 @@ public class Program
 
     public static async Task Main()
     {
-        Console.WriteLine("Input Devices:");
-        for (var i = 0; i < WaveInEvent.DeviceCount; i++)
+        if (string.IsNullOrEmpty(FileReader.IniReadValue("AUDIO DEVICE IDS", "MICROPHONE_ID")))
         {
-            var caps = WaveInEvent.GetCapabilities(i);
-            Console.WriteLine($"ID: {i}, Device: {caps.ProductName}");
-        }
+            Console.WriteLine("Input Devices:");
+            for (var i = -1; i < WaveInEvent.DeviceCount; i++)
+            {
+                var caps = WaveInEvent.GetCapabilities(i);
+                Console.WriteLine($"ID: {i}, Device: {caps.ProductName}");
+            }
 
-        Console.WriteLine("\nOutput Devices:");
-        var outputDeviceList = DirectSoundOut.Devices.ToList();
-        for (var i = 0; i < outputDeviceList.Count; i++)
-        {
-            var caps = outputDeviceList[i];
-            Console.WriteLine($"ID: {i}, Device: {caps.Description}, GUID: {caps.Guid}");
+            Console.WriteLine("\nOutput Devices:");
+            var outputDeviceList = DirectSoundOut.Devices.ToList();
+            for (var i = 0; i < outputDeviceList.Count; i++)
+            {
+                var caps = outputDeviceList[i];
+                Console.WriteLine($"ID: {i - 1}, Device: {caps.Description}, GUID: {caps.Guid}");
+            }
+            Console.WriteLine("\n");
+
+            while (true)
+            {
+                await Task.Delay(100);
+            }
         }
-        Console.WriteLine("\n");
         await CheckRecordAsync();
     }
 
