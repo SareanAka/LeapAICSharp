@@ -25,18 +25,12 @@ recognition.
 WhisperAI and Voicevox both have docker images available on DockerHub, so we will be building and running them both via a [Docker Compose file](docker-compose.yml).
 DeepL can be interacted with by signing up for a free plan and interacting with its [REST API](https://www.deepl.com/pro-api?cta=header-pro-api/) up to 500,000 character limit / month
 
-## How it works
 
-
-### Voice Translator
+### How the Voice Translator works
 
 When run this application will record your microphone whenever a push-to-talk key is held down on the keyboard.
-Once this key is released, it saves your voice in an audio file which is then sent to WhisperAI's transcribe endpoint which runs Automatic Speech Recognition (ASR) on it.
-
-
-The first, [voice_translator.py](src/voice_translator.py), records your microphone whenever a push-to-talk key is held down on the keyboard.
-Once this key is released, it saves your voice in an audio file which is then sent to WhisperAI's transcribe endpoint which runs Automatic Speech Recognition (ASR) on it.
-After a response containing your speech as text is received, this text is then translated using DeepL's REST API. 
+Once this key is released, it saves your voice in an audio file which is then sent to the whisperApi class which will post a request to WhisperAI which runs Automatic Speech Recognition (ASR) on it.
+WhisperApi will return the text which was transcribed which is sent to the translator that is currently in use (Google Translate by default and DeepL when USE_DEEPL=true in the settings.ini file)
 
 The translated text is then sent to Voicevox which performs text-to-speech and generates an audio file voiced in Japanese.
 This file is then played to your target application's microphone input and your speakers/headphones.
