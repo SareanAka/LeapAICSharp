@@ -7,7 +7,10 @@ namespace LeapAI.Components
         private static Translator _translator;
         public DeepLApi(IniFileReader fileReader)
         {
-            _translator = new Translator(fileReader.IniReadValue("DEEPL AUTHENTICATION KEY", "DEEPL_AUTH_KEY"));
+            if (bool.Parse(fileReader.IniReadValue("TRANSLATOR", "USE_DEEPL")))
+            {
+                _translator = new Translator(fileReader.IniReadValue("DEEPL AUTHENTICATION KEY", "DEEPL_AUTH_KEY"));
+            }
         }
 
         public async Task<string?> TranslateAsync(string input)
