@@ -22,7 +22,7 @@ recognition.
 3. [Voicevox](https://voicevox.hiroshiba.jp/): Japanese Deep-Learning AI Voice Synthesizer
 
 
-WhisperAI and Voicevox both have docker images available on DockerHub, so we will be building and running them both via a [Docker Compose file](docker-compose.yml).
+WhisperAI and Voicevox both have docker images available on DockerHub, so we will be building and running them both via a [Docker Compose file](Docker&Colab/docker-compose.yml).
 DeepL can be interacted with by signing up for a free plan and interacting with its [REST API](https://www.deepl.com/pro-api?cta=header-pro-api/) up to 500,000 character limit / month
 
 
