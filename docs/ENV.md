@@ -1,6 +1,6 @@
 # Writing your .env file
 
-First, copy [settings.ini](LeapAI/settingsPreview.ini) to .env by running the following command.
+First, copy [settings.ini](../LeapAI/settingsPreview.ini) to .env by running the following command.
 
 ```copy settingsPreview.ini settings.ini```
 
