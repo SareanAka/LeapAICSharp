@@ -32,9 +32,4 @@ You may follow these instructions [here](https://docs.docker.com/desktop/install
 In order to proper route and separate audio between applications, your system audio, and python, we will be also be installing Voicemeeter Banana.
 You can download and install Voicemeeter from their website [here](https://vb-audio.com/Voicemeeter/banana.htm).
 
-### Virtual Audio Cable
-
-As the number of virtual cables provided by Voicemeeter Banana is not enough, we will also be installing an extra one [here](https://vb-audio.com/Cable/).
-Download and Install VB-CABLE Driver by extracting all files and Run Setup Program in administrator mode. Reboot after installation.
-
 After completing this step, you may move on to the next: Setting up [audio routing](AUDIO.md) using Voicemeeter Banana.
