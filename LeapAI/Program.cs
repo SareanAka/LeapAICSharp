@@ -45,6 +45,7 @@ public class Program
                 await Task.Delay(100);
             }
         }
+        Console.WriteLine("Press you push-to-talk button to start recording\n");
         await CheckRecordAsync();
     }
 
