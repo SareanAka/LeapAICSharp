@@ -15,6 +15,7 @@ namespace LeapAI.Components
         /// </summary>
         public AudioRecorder(IniFileReader fileReader)
         {
+            EnsureAudioFolderExists();
             // Settings of the recorder
             _voiceInput = new WaveInEvent
             {
@@ -25,6 +26,14 @@ namespace LeapAI.Components
             };
             _voiceInput.DataAvailable += WaveIn_DataAvailable;
             _voiceInput.RecordingStopped += WaveSourceRecordingStopped;
+        }
+
+        private void EnsureAudioFolderExists()
+        {
+            if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio")))
+            {
+                Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio"));
+            }
         }
         
 
