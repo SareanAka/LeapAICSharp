@@ -54,12 +54,22 @@ namespace LeapAI.Components
             result.intonationScale = _intonationScale;
             result.prePhonemeLength = _prePhonemeLength;
             result.postPhonemeLength = _postPhonemeLength;
+            result.outputSamplingRate = 44100;
+            result.outputStereo = false;
 
-            var synthesisRequest = new RestRequest("synthesis", Method.Post);
-            synthesisRequest.AddQueryParameter("speaker", _speakerId);
-            synthesisRequest.AddJsonBody(result);
+            try
+            {
+                var synthesisRequest = new RestRequest("synthesis", Method.Post);
+                synthesisRequest.AddQueryParameter("speaker", _speakerId);
+                synthesisRequest.AddBody(JsonConvert.SerializeObject(result));
 
-            return await _client.DownloadDataAsync(synthesisRequest);
+                return await _client.DownloadDataAsync(synthesisRequest);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
 
         #region JsonClasses

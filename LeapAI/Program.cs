@@ -21,12 +21,21 @@ public class Program
 
     public static async Task Main()
     {
-        var deviceList = DirectSoundOut.Devices.ToList();
-        for (var i = 0; i < deviceList.Count; i++)
+        Console.WriteLine("Input Devices:");
+        for (var i = 0; i < WaveInEvent.DeviceCount; i++)
         {
-            var caps = deviceList[i];
-            Console.WriteLine($"{i}: {caps.Description}");
+            var caps = WaveInEvent.GetCapabilities(i);
+            Console.WriteLine($"ID: {i}, Device: {caps.ProductName}");
         }
+
+        Console.WriteLine("\nOutput Devices:");
+        var outputDeviceList = DirectSoundOut.Devices.ToList();
+        for (var i = 0; i < outputDeviceList.Count; i++)
+        {
+            var caps = outputDeviceList[i];
+            Console.WriteLine($"ID: {i}, Device: {caps.Description}, GUID: {caps.Guid}");
+        }
+        Console.WriteLine("\n");
         await CheckRecordAsync();
     }
 
@@ -82,10 +91,25 @@ public class Program
                             // Run the translated text into the Japanese Text-to-speech program
                             var result = await VoiceVox.TextToSpeechAsync(translatedText);
 
+                            var attempts = 0;
+                            while (result == null)
+                            {
+                                result = await VoiceVox.TextToSpeechAsync(translatedText);
+                                attempts++;
+                                if (attempts >= 5)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    await Task.Delay(100);
+                                    Console.WriteLine("Retrying...");
+                                }
+                            }
                             if (result != null)
                             {
                                 VoicePlayer.PlayAudio(result);
-                            }
+                            } else {Console.WriteLine("Could not get audio file.");}
                         } else {Console.WriteLine("No translated text was found.");}
                     } else {Console.WriteLine("Whisper has detected no speech.");}
                 }
