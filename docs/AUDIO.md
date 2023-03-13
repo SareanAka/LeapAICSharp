@@ -37,9 +37,8 @@ Select B2 so that the application audio will be passed into VoiceMeeter Aux Outp
 
 ## Application settings
 
-For the application whose audio you want to translate, e.g. Apex, Valorant, Discord, Google Chrome, set the audio output device to VoiceMeeter Aux Input (VB-Audio VoiceMeeter AUX VAIO).
-This sends the application's audio into the AUX cable.
-Also set the application's audio input device to CABLE Output (VB-Audio Virtual Cable). This cable is where the TTS audio will be played into.
+For the application whose audio you want to translate, e.g. Apex, Valorant, Discord, Google Chrome, set the audio output device to VoiceMeeter Input (VB-Audio VoiceMeeter VAIO).
+Also set the application's audio input device to VoiceMeeter Aux Input (VB-Audio VoiceMeeter Aux VAIO). This cable is where the TTS audio will be played into.
 
 ![](screenshots/app_io_devices.png?raw=true)
 
@@ -59,4 +58,4 @@ You can adjust this to the point where WhisperAI's accuracy is not affected by o
 
 ![](screenshots/app_volume_levels.png?raw=true)
 
-After setting up the audio routing, we can finally move on to the last step of the setup: [Writing your Environment file](ENV.md).
+After setting up the audio routing, we can finally move on to the last step of the setup: [Writing your settings.ini file](ENV.md).
