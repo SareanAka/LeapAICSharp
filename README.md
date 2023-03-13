@@ -1,3 +1,10 @@
+# Notice
+
+This project is a CSharp rewrite of an existing project by the content creator [SociallyIneptWeep](https://www.youtube.com/@sociallyineptweeb).
+I made this in CSharp both to optimize the code in my own way and also learn more about the language. Also because I was bored starved for a female voi-
+Anyways...
+Most of the documentation here was written by [SociallyIneptWeep](https://www.youtube.com/@sociallyineptweeb) and can be found in the [original repository](https://github.com/SociallyIneptWeeb/LanguageLeapAI), I merely rewrote some of it to fit my application. Go show him some love!
+
 # LeapAICSharp
 
 LEAP across Language barriers by using AI to converse with other online users from across the globe!
@@ -22,6 +29,10 @@ DeepL can be interacted with by signing up for a free plan and interacting with 
 
 
 ### Voice Translator
+
+When run this application will record your microphone whenever a push-to-talk key is held down on the keyboard.
+Once this key is released, it saves your voice in an audio file which is then sent to WhisperAI's transcribe endpoint which runs Automatic Speech Recognition (ASR) on it.
+
 
 The first, [voice_translator.py](src/voice_translator.py), records your microphone whenever a push-to-talk key is held down on the keyboard.
 Once this key is released, it saves your voice in an audio file which is then sent to WhisperAI's transcribe endpoint which runs Automatic Speech Recognition (ASR) on it.
