@@ -43,7 +43,7 @@ However, Voicevox can be replaced with any other text to speech program that can
 Setting up **LanguageLeapAI** requires 3 crucial steps, so don't miss out on any of them!
 1. [Installing Services and Dependencies](docs/INSTALLATION.md)
 2. [Audio Routing](docs/AUDIO.md)
-3. [Writing your Environment file](docs/ENV.md)
+3. [Writing your settings.ini file](docs/ENV.md)
 
 
 ## Usage
@@ -54,11 +54,11 @@ To run **LanguageLeapAI**, you need to first run WhisperAI and Voicevox. They ca
 
 If your GPU is not powerful enough, you may want to consider running WhisperAI and Voicevox using Google Colab's GPU.
 
-Upload [run_whisper_colab.ipynb](src/run_whisper_colab.ipynb) and [run_voicevox_colab.ipynb](src/run_voicevox_colab.ipynb) files to Google drive, open the notebook with Google Colab and simply follow the instructions!
+Upload [run_whisper_colab.ipynb](Docker&Colab/run_whisper_colab.ipynb) and [run_voicevox_colab.ipynb](Docker&Colab/run_voicevox_colab.ipynb) files to Google drive, open the notebook with Google Colab and simply follow the instructions!
 
 ### Docker
 
-If you still want to run both Whisper and Voicevox on your computer, run these commands in the root folder containing the [docker-compose.yml](docker-compose.yml) file.
+If you still want to run both Whisper and Voicevox on your computer, run these commands in the folder containing the [docker-compose.yml](docker-compose.yml) file.
 
 To run both WhisperAI and Voicevox:
 
