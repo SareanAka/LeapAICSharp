@@ -40,11 +40,11 @@ Select B2 so that the application audio will be passed into VoiceMeeter Aux Outp
 For the application whose audio you want to translate, e.g. Apex, Valorant, Discord, Google Chrome, set the audio output device to VoiceMeeter Input (VB-Audio VoiceMeeter VAIO).
 Also set the application's audio input device to VoiceMeeter Aux Input (VB-Audio VoiceMeeter Aux VAIO). This cable is where the TTS audio will be played into.
 
-![](screenshots/app_io_devices.png?raw=true)
+![](screenshots/app_io_devices1.png?raw=true)
 
 For applications like Google Chrome, you may also configure their application's audio I/O device via your computer's Volume mixer settings.
 
-![](screenshots/chrome_audio_devices.png?raw=true)
+![](screenshots/chrome_audio_devices1.png?raw=true)
 
 For full-screen applications like Apex Legends, set the Display Mode to Borderless Window so that subtitles can be displayed over it.
 
