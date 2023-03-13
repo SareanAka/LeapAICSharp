@@ -21,7 +21,7 @@ public class Program
 
     public static async Task Main()
     {
-        if (string.IsNullOrEmpty(FileReader.IniReadValue("AUDIO DEVICE IDS", "MICROPHONE_ID")))
+        if (int.Parse(FileReader.IniReadValue("AUDIO DEVICE IDS", "MICROPHONE_ID")) == 99)
         {
             Console.WriteLine("Input Devices:");
             for (var i = -1; i < WaveInEvent.DeviceCount; i++)
@@ -38,6 +38,7 @@ public class Program
                 Console.WriteLine($"ID: {i - 1}, Device: {caps.Description}, GUID: {caps.Guid}");
             }
             Console.WriteLine("\n");
+            Console.WriteLine("Press Crtl + c to close the program");
 
             while (true)
             {
