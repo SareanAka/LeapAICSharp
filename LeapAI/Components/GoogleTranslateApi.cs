@@ -38,10 +38,5 @@ namespace LeapAI.Components
 
             return null;
         }
-
-        private class GoogleTranslateResult
-        {
-
-        }
     }
 }
