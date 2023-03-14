@@ -8,7 +8,7 @@ namespace LeapAI.Components
 
         public AudioPlayer(IniFileReader fileReader)
         {
-            outputDevice = new DirectSoundOut(new Guid("df4af2ac-33ca-409d-b23f-306676c6c238"));
+            outputDevice = new DirectSoundOut(new Guid(fileReader.IniReadValue("AUDIO DEVICE IDS", "VOICEMEETER_INPUT_ID")));
         }
 
         public void PlayAudio(byte[] input)
