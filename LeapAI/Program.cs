@@ -119,6 +119,7 @@ public class Program
                             if (result != null)
                             {
                                 VoicePlayer.PlayAudio(result);
+                                if (bool.Parse(FileReader.IniReadValue("LOGGING", "LOGGING"))) Console.WriteLine("Playing Audio...");
                             } else {Console.WriteLine("Could not get audio file.");}
                         } else {Console.WriteLine("No translated text was found.");}
                     } else {Console.WriteLine("Whisper has detected no speech.");}
