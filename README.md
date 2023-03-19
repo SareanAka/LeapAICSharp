@@ -1,9 +1,9 @@
 # Notice
 
-This project is a CSharp rewrite of an existing project by the content creator [SociallyIneptWeep](https://www.youtube.com/@sociallyineptweeb).
+This project is a CSharp rewrite of an existing project by the content creator [SociallyIneptWeeb](https://www.youtube.com/@sociallyineptweeb).
 I made this in CSharp both to optimize the code in my own way and also learn more about the language. Also because I was bored starved for a female voi-
 Anyways...
-Most of the documentation here was written by [SociallyIneptWeep](https://www.youtube.com/@sociallyineptweeb) and can be found in the [original repository](https://github.com/SociallyIneptWeeb/LanguageLeapAI), I merely rewrote some of it to fit my application. Go show him some love!
+Most of the documentation here was written by [SociallyIneptWeeb](https://www.youtube.com/@sociallyineptweeb) and can be found in the [original repository](https://github.com/SociallyIneptWeeb/LanguageLeapAI), I merely rewrote some of it to fit my application. Go show him some love!
 
 # LeapAICSharp
 
