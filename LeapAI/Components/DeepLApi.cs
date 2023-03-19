@@ -9,7 +9,7 @@ namespace LeapAI.Components
         {
             if (bool.Parse(fileReader.IniReadValue("TRANSLATOR", "USE_DEEPL")))
             {
-                _translator = new Translator(fileReader.IniReadValue("DEEPL AUTHENTICATION KEY", "DEEPL_AUTH_KEY"));
+                _translator = new Translator(fileReader.IniReadValue("AUTHENTICATION KEYS", "DEEPL_AUTH_KEY"));
             }
         }
 

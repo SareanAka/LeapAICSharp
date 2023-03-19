@@ -1,4 +1,5 @@
 ﻿using LeapAI.Components;
+using LeapAI.OpenAI;
 using NAudio.Wave;
 
 namespace LeapAI;
@@ -15,6 +16,7 @@ public class Program
     private static readonly GoogleTranslateApi GoogleTranslate = new();
     private static readonly VoiceVoxApi VoiceVox = new (FileReader);
     private static readonly AudioPlayer VoicePlayer = new(FileReader);
+    private static readonly OpenAIApi OpenAI = new(FileReader);
 
     // Get the keycode for the push-to-talk button
     private static readonly int VkN = int.Parse(FileReader.IniReadValue("PUSH TO TALK KEY", "MIC_RECORD_KEY"));
@@ -46,7 +48,76 @@ public class Program
             }
         }
         Console.WriteLine("Press your push-to-talk button to start recording\n");
-        await CheckRecordAsync();
+        //await CheckRecordAsync();
+        await ChatBotAsync();
+    }
+
+
+
+    private static async Task ChatBotAsync()
+    {
+        while (true)
+        {
+            // Check if the push-to-talk key is pressed
+            if (AudioRecorder.GetAsyncKeyState(VkN) != 0)
+            {
+                // If not already recording, start recording
+                if (!Recorder.IsRecording)
+                {
+                    Recorder.StartRecording();
+                }
+            }
+            else
+            {
+                // If recording, stop recording
+                if (Recorder.IsRecording)
+                {
+                    await Recorder.StopRecording();
+
+                    // Transcribe the recording file
+                    var transcribedText = await Whisper.TranscribeAsync("Audio/recording.wav");
+                    if (!string.IsNullOrEmpty(transcribedText))
+                    {
+                        var response = await OpenAI.GetResponseAsync(transcribedText);
+                        if (response != null)
+                        {
+                            string? translatedText;
+                            // Check if DeepL is in use
+                            if (bool.Parse(FileReader.IniReadValue("TRANSLATOR", "USE_DEEPL")))
+                            {
+                                // Translate the transcribed text into Japanese
+                                translatedText = await DeepL.TranslateAsync(response);
+                            }
+                            else
+                            {
+                                translatedText = await GoogleTranslate.GoogleTranslateAsync(response);
+                            }
+
+                            if (bool.Parse(FileReader.IniReadValue("LOGGING", "LOGGING")))
+                            {
+                                Console.WriteLine($"User: {transcribedText}");
+                                Console.WriteLine($"Bottu: {response}");
+                            }
+
+                            if (translatedText != null)
+                            {
+                                // Run the translated text into the Japanese Text-to-speech program
+                                var result = await VoiceVox.TextToSpeechAsync(translatedText);
+
+                                if (result != null)
+                                {
+                                    VoicePlayer.PlayAudio(result);
+                                    if (bool.Parse(FileReader.IniReadValue("LOGGING", "LOGGING"))) Console.WriteLine("Playing Audio...");
+                                } else { Console.WriteLine("Could not get audio file."); }
+                            } else { Console.WriteLine("No translated text was found."); }
+                        } else { Console.WriteLine("Something goofy ahh with OpenAI, u prolly run outta tokens"); }
+                    } else { Console.WriteLine("Whisper has detected no speech."); }
+                }
+            }
+
+            // Wait a bit to reduce CPU usage
+            await Task.Delay(100);
+        }
     }
 
     /// <summary>
@@ -87,8 +158,6 @@ public class Program
                         {
                             translatedText = await GoogleTranslate.GoogleTranslateAsync(transcribedText);
                         }
-
-                        await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio", "translate.txt"), translatedText);
 
                         if (bool.Parse(FileReader.IniReadValue("LOGGING", "LOGGING")))
                         {
